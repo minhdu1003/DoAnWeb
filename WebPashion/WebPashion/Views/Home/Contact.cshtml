@@ -1,0 +1,88 @@
+﻿
+@{
+    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="contact-info"><p>LIÊN HỆ VÀ CHÍNH SÁCH BẢO HÀNH</p></div>
+<div class="contact ">
+    <div style="text-align:left;" class="contact-left col-xs-6">
+        <div style="padding-bottom:10px;" class="dv">
+            <p style="text-align:center;">DỊCH VỤ KHÁCH HÀNG</p>
+        </div>
+        <div class="title">
+            <p>LIÊN HỆ</p>
+        </div>
+        <div class="lh">
+            <p><b>Địa chỉ:</b> 443 Điện Biên Phủ - P25 - Quận Bình Thạnh - TPHCM</p>
+            <p><b>Email:</b> hoangkhang09@gmail.com</p>
+            <p><b>Mua hàng online</b> 0339 065 142</p>
+            <p><b>CSKH:</b>cskh@fs.com.vn</p>
+            <div class="time">
+                <p>Thứ 2 đến thứ 7 ,từ 07:30 đến 17:30</p>
+            </div>
+
+        </div>
+        <p>.........................................................................................................</p>
+
+        <div class="title">
+            <p>CHÍNH SÁCH BẢO HÀNH VÀ SỬA CHỮA</p>
+        </div>
+        <div class="csbh">
+            <p>Chỉ tại FSG, bạn được hỗ trợ về sản phẩm với chính sách bảo hành sản phẩm trọn đời miễn phí!</p>
+            <p> Tuy nhiên, chính sách này không bao gồm những trường hợp đặc biệt như sau : </p>
+            <p>- Các sản phẩm mang nhãn FSG, áo ,đầm; các sản phẩm chất liệu thun/len/thun len, jeans,…</p>
+            <p>- Nếu sửa sản phẩm mất thêm chi phí nguyên vật liệu, Qúy khách hàng vui lòng trả thêm phần chi phí đó.</p>
+            <p>- Đối với khách hàng mua hàng online. Quý khách có yêu cầu sửa chữa bảo hành có thể mang sản phẩm tới bất kỳ showroom chính hãng của FSG để sử dụng dịch vụ.</p>
+        </div>
+    </div>
+    <div class="contact-right col-xs-6">
+        <div id="map"></div>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVmkDHBddblHbba9VGV24Yu032wCb0uc4&callback=initMap&libraries=places&v=weekly"
+                async></script>
+    </div>
+    <script>
+
+        let map;
+        let service;
+        let infowindow;
+
+        function initMap() {
+            const sydney = new google.maps.LatLng(-33.867, 151.195);
+            infowindow = new google.maps.InfoWindow();
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: sydney,
+                zoom: 15,
+            });
+
+            const request = {
+                query: "Hutech University",
+                fields: ["name", "geometry"],
+            };
+            service = new google.maps.places.PlacesService(map);
+            service.findPlaceFromQuery(request, (results, status) => {
+                if (status === google.maps.places.PlacesServiceStatus.OK && results) {
+                    for (let i = 0; i < results.length; i++) {
+                        createMarker(results[i]);
+                    }
+                    map.setCenter(results[0].geometry.location);
+                }
+            });
+        }
+
+        function createMarker(place) {
+            if (!place.geometry || !place.geometry.location) return;
+            const marker = new google.maps.Marker({
+                map,
+                position: place.geometry.location,
+            });
+            google.maps.event.addListener(marker, "click", () => {
+                infowindow.setContent(place.name || "");
+                infowindow.open(map);
+            });
+        }
+
+    </script>
+</div>
+<div class="clearfix"> </div>
+

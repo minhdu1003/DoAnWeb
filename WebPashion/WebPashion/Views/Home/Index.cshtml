@@ -1,0 +1,248 @@
+﻿@using WebPashion.Models;
+@{
+    ViewBag.Title = "Trang chủ";
+    List<PRODUCT> listAo = ViewBag.Ao;
+    List<PRODUCT> listQuan = ViewBag.Quan;
+    List<PRODUCT> listVay = ViewBag.Vay;
+    List<PRODUCT> listPhuKien = ViewBag.PhuKien;
+    List<PRODUCT> listSanPhamMoi = ViewBag.SanPhamMoi;
+    List<PRODUCT> listSanPhamBanChay = ViewBag.SanPhamBanChay;
+}
+<div class="new_arrivals_agile_w3ls_info">
+    <div class="container">
+        <h3 class="wthree_text_info">Danh mục <span>sản phẩm</span></h3>
+        <div id="horizontalTab">
+            <ul class="resp-tabs-list">
+                <li> Áo</li>
+                <li> Quần</li>
+                <li> Đầm</li>
+                <li> Phụ kiện</li>
+            </ul>
+            <div class="resp-tabs-container">
+                <!--/tab_one-->
+                <div class="tab1">
+                    @foreach (var item in listAo)
+                    {
+                        <div class="col-md-3 product-men">
+                            <div class="men-pro-item simpleCart_shelfItem">
+                                <div class="men-thumb-item">
+                                    <img src="~/Content/images/IMG/@item.ProductImage" alt="" class="pro-image-front">
+                                    <img src="~/Content/images/IMG/@item.ProductImage" alt="" class="pro-image-back">
+                                    <div class="men-cart-pro">
+                                        <div class="inner-men-cart-pro">
+                                            <a href="@Url.Action("GetDetail","Home",new { id=item.ID})" class="link-product-add-cart">Xem chi tiết</a>
+                                        </div>
+                                    </div>
+                                    <span class="product-new-top">New</span>
+                                </div>
+                                <div class="item-info-product ">
+                                    <h4><a href="@Url.Action("GetDetail","Home",new { id=item.ID})">@item.ProductName</a></h4>
+                                    <div class="info-product-price">
+                                        <span class="item_price">@String.Format("{0:0,0}", item.ProductPrice)&#160;VNĐ</span>
+                                        <del><sup style="word-spacing:-5px;">@item.PRODUCT_SALE.SaleName %<sup></del>
+                                    </div>
+                                    <a href="@Url.Action("AddCart", "Cart",new {@iID = @item.ID,strURL = Request.Url.ToString() })"><button class="custom-btn btn-7"><span>Thêm giỏ hàng  <i class="fas fa-cart-plus"></i></span> </button></a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <div class="clearfix"></div>
+                </div>
+                <!--//tab_one-->
+                <!--/tab_two-->
+                <div class="tab2">
+                    @foreach (var item in listQuan)
+                    {
+                        <div class="col-md-3 product-men">
+                            <div class="men-pro-item simpleCart_shelfItem">
+                                <div class="men-thumb-item">
+                                    <img src="~/Content/images/IMG/@item.ProductImage" alt="" class="pro-image-front">
+                                    <img src="~/Content/images/IMG/@item.ProductImage" alt="" class="pro-image-back">
+                                    <div class="men-cart-pro">
+                                        <div class="inner-men-cart-pro">
+                                            <a href="@Url.Action("GetDetail","Home",new { id=item.Type})" class="link-product-add-cart">Xem chi tiết</a>
+                                        </div>
+                                    </div>
+                                    <span class="product-new-top">New</span>
+                                </div>
+                                <div class="item-info-product ">
+                                    <h4><a href="@Url.Action("GetDetail","Home",new { id=item.ID})">@item.ProductName</a></h4>
+                                    <div class="info-product-price">
+                                        <span class="item_price">@String.Format("{0:0,0}", item.ProductPrice)&#160;VNĐ</span>
+                                        <del><sup style="word-spacing:-5px;">@item.PRODUCT_SALE.SaleName %<sup></del>
+                                    </div>
+                                    <a href="@Url.Action("AddCart", "Cart",new {@iID = @item.ID,strURL = Request.Url.ToString() })"><button class="custom-btn btn-7"><span>Thêm giỏ hàng  <i class="fas fa-cart-plus"></i></span> </button></a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <div class="clearfix"></div>
+                </div>
+                <!--//tab_two-->
+                <!--/tab_three-->
+                <div class="tab3">
+                    @foreach (var item in listVay)
+                    {
+                        <div class="col-md-3 product-men">
+                            <div class="men-pro-item simpleCart_shelfItem">
+                                <div class="men-thumb-item">
+                                    <img src="~/Content/images/IMG/@item.ProductImage" alt="" class="pro-image-front">
+                                    <img src="~/Content/images/IMG/@item.ProductImage" alt="" class="pro-image-back">
+                                    <div class="men-cart-pro">
+                                        <div class="inner-men-cart-pro">
+                                            <a href="@Url.Action("GetDetail","Home",new { id=item.ID})" class="link-product-add-cart">Xem chi tiết</a>
+                                        </div>
+                                    </div>
+                                    <span class="product-new-top">New</span>
+                                </div>
+                                <div class="item-info-product ">
+                                    <h4><a href="@Url.Action("GetDetail","Home",new { id=item.ID})">@item.ProductName</a></h4>
+                                    <div class="info-product-price">
+                                        <span class="item_price">@String.Format("{0:0,0}", item.ProductPrice)&#160;VNĐ</span>
+                                        <del><sup style="word-spacing:-5px;">@item.PRODUCT_SALE.SaleName %<sup></del>
+                                    </div>
+                                    <a href="@Url.Action("AddCart", "Cart",new {@iID = @item.ID,strURL = Request.Url.ToString() })"><button class="custom-btn btn-7"><span>Thêm giỏ hàng  <i class="fas fa-cart-plus"></i></span> </button></a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <div class="clearfix"></div>
+                </div>
+                <!--//tab_three-->
+                <!--/tab_four-->
+                <div class="tab4">
+                    @foreach (var item in listPhuKien)
+                    {
+                        <div class="col-md-3 product-men">
+                            <div class="men-pro-item simpleCart_shelfItem">
+                                <div class="men-thumb-item">
+                                    <img src="~/Content/images/IMG/@item.ProductImage" alt="" class="pro-image-front">
+                                    <img src="~/Content/images/IMG/@item.ProductImage" alt="" class="pro-image-back">
+                                    <div class="men-cart-pro">
+                                        <div class="inner-men-cart-pro">
+                                            <a href="@Url.Action("GetDetail","Home",new { id=item.ID})" class="link-product-add-cart">Xem chi tiết</a>
+                                        </div>
+                                    </div>
+                                    <span class="product-new-top">New</span>
+                                </div>
+                                <div class="item-info-product ">
+                                    <h4><a href="@Url.Action("GetDetail","Home",new { id=item.ID})">@item.ProductName</a></h4>
+                                    <div class="info-product-price">
+                                        <span class="item_price">@String.Format("{0:0,0}", item.ProductPrice)&#160;VNĐ</span>
+                                        <del><sup style="word-spacing:-5px;">@item.PRODUCT_SALE.SaleName %<sup></del>
+                                    </div>
+                                    <a href="@Url.Action("AddCart", "Cart",new {@iID = @item.ID,strURL = Request.Url.ToString() })"><button class="custom-btn btn-7"><span>Thêm giỏ hàng  <i class="fas fa-cart-plus"></i></span> </button></a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <div class="clearfix"></div>
+                </div>
+                <!--//tab_four-->
+            </div>
+        </div>
+    </div>
+</div>
+<!--Sản phẩm mới-->
+<div class="new_arrivals_agile_w3ls_info">
+    <div class="container">
+        <h3 class="wthree_text_info">sản phẩm <span> Mới </span></h3>
+        <div id="horizontalTab">
+            <div class="resp-tabs-container">
+                <!--/tab_one-->
+                <div class="tab5">
+                    @foreach (var item in listSanPhamMoi)
+                    {
+                        <div class="col-md-3 product-men">
+                            <div class="men-pro-item simpleCart_shelfItem">
+                                <div class="men-thumb-item">
+                                    <img src="~/Content/images/IMG/@item.ProductImage" alt="" class="pro-image-front">
+                                    <img src="~/Content/images/IMG/@item.ProductImage" alt="" class="pro-image-back">
+                                    <div class="men-cart-pro">
+                                        <div class="inner-men-cart-pro">
+                                            <a href="@Url.Action("GetDetail","Home",new { id=item.ID})" class="link-product-add-cart">Xem chi tiết</a>
+                                        </div>
+                                    </div>
+                                    <span class="product-new-top">New</span>
+                                </div>
+                                <div class="item-info-product ">
+                                    <h4><a href="@Url.Action("GetDetail","Home",new { id=item.ID})">@item.ProductName</a></h4>
+                                    <div class="info-product-price">
+                                        <span class="item_price">@String.Format("{0:0,0}", item.ProductPrice)&#160;VNĐ</span>
+                                        <del><sup style="word-spacing:-5px;">@item.PRODUCT_SALE.SaleName %<sup></del>
+                                    </div>
+                                  
+                                        <a href="@Url.Action("AddCart", "Cart",new {@iID = @item.ID,strURL = Request.Url.ToString() })"><button class="custom-btn btn-7"><span>Thêm giỏ hàng  <i class="fas fa-cart-plus"></i></span> </button></a>
+                                   
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <div class="clearfix"></div>
+                </div>
+                <!--//tab_one-->
+                <!--/tab_two-->
+                <!--//tab_two-->
+                <!--/tab_three-->
+                <!--//tab_three-->
+                <!--/tab_four-->
+                <!--//tab_four-->
+            </div>
+        </div>
+    </div>
+</div>
+<!--Sản phẩm bán chạy-->
+<div class="new_arrivals_agile_w3ls_info">
+    <div class="container">
+        <h3 class="wthree_text_info">sản phẩm <span> bán chạy </span></h3>
+        <div id="horizontalTab">
+            <div class="resp-tabs-container">
+                <!--/tab_one-->
+                <div class="tab5">
+                    @foreach (var item in listSanPhamBanChay)
+                    {
+                        <div class="col-md-3 product-men">
+                            <div class="men-pro-item simpleCart_shelfItem">
+                                <div class="men-thumb-item">
+                                    <img src="~/Content/images/IMG/@item.ProductImage" alt="" class="pro-image-front">
+                                    <img src="~/Content/images/IMG/@item.ProductImage" alt="" class="pro-image-back">
+                                    <div class="men-cart-pro">
+                                        <div class="inner-men-cart-pro">
+                                            <a href="@Url.Action("GetDetail","Home",new { id=item.ID})" class="link-product-add-cart">Xem chi tiết</a>
+                                        </div>
+                                    </div>
+                                    <span class="product-new-top">New</span>
+
+                                </div>
+                                <div class="item-info-product ">
+                                    <h4><a href="@Url.Action("GetDetail","Home",new { id=item.ID})">@item.ProductName</a></h4>
+                                    <div class="info-product-price">
+                                        <span class="item_price">@String.Format("{0:0,0}", item.ProductPrice)&#160;VNĐ</span>
+                                        <del><sup style="word-spacing:-5px;">@item.PRODUCT_SALE.SaleName %<sup></del>
+                                    </div>
+                                    <a href="@Url.Action("AddCart", "Cart",new {@iID = @item.ID,strURL = Request.Url.ToString() })"><button class="custom-btn btn-7"><span>Thêm giỏ hàng  <i class="fas fa-cart-plus"></i></span> </button></a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <div class="clearfix"></div>
+                </div>
+                <!--//tab_one-->
+                <!--/tab_two-->
+                <!--//tab_two-->
+                <!--/tab_three-->
+                <!--//tab_three-->
+                <!--/tab_four-->
+                <!--//tab_four-->
+            </div>
+        </div>
+    </div>
+</div>
+

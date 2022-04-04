@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="75db1ef45c854ebc91ddd799df6ecd9a" Name="Diagram1">
+        <EntityTypeShape EntityType="FashionShopManagemnetModel.ADMIN" Width="1.5" PointX="2.75" PointY="6.75" />
+        <EntityTypeShape EntityType="FashionShopManagemnetModel.BILL" Width="1.5" PointX="3" PointY="13.375" />
+        <EntityTypeShape EntityType="FashionShopManagemnetModel.CUSTOMER" Width="1.5" PointX="0.75" PointY="13.375" />
+        <EntityTypeShape EntityType="FashionShopManagemnetModel.PRODUCT" Width="1.5" PointX="3" PointY="1.75" />
+        <EntityTypeShape EntityType="FashionShopManagemnetModel.PRODUCT_BRAND" Width="1.5" PointX="0.75" PointY="3" />
+        <EntityTypeShape EntityType="FashionShopManagemnetModel.PRODUCT_DETAIL" Width="1.5" PointX="5.25" PointY="2.625" />
+        <EntityTypeShape EntityType="FashionShopManagemnetModel.PRODUCT_SALE" Width="1.5" PointX="0.75" PointY="10.875" />
+        <EntityTypeShape EntityType="FashionShopManagemnetModel.PRODUCT_SIZE" Width="1.5" PointX="0.75" PointY="8.5" />
+        <EntityTypeShape EntityType="FashionShopManagemnetModel.PRODUCT_TYPE" Width="1.5" PointX="0.75" PointY="6.125" />
+        <EntityTypeShape EntityType="FashionShopManagemnetModel.REVIEWS" Width="1.5" PointX="8.25" PointY="2.625" />
+        <EntityTypeShape EntityType="FashionShopManagemnetModel.sysdiagrams" Width="1.5" PointX="4.75" PointY="6.75" />
+        <AssociationConnector Association="FashionShopManagemnetModel.FK_BILL_CUSTOMER" />
+        <AssociationConnector Association="FashionShopManagemnetModel.FK_PRODUCT_DETAIL_BILL" />
+        <AssociationConnector Association="FashionShopManagemnetModel.FK_REVIEWS_CUSTOMER" />
+        <AssociationConnector Association="FashionShopManagemnetModel.FK_PRODUCT_DETAIL_PRODUCT" />
+        <AssociationConnector Association="FashionShopManagemnetModel.FK_PRODUCT_PRODUCT_BRAND" />
+        <AssociationConnector Association="FashionShopManagemnetModel.FK_PRODUCT_PRODUCT_SALE" />
+        <AssociationConnector Association="FashionShopManagemnetModel.FK_PRODUCT_PRODUCT_SIZE" />
+        <AssociationConnector Association="FashionShopManagemnetModel.FK_PRODUCT_PRODUCT_TYPE" />
+        <AssociationConnector Association="FashionShopManagemnetModel.FK_REVIEWS_PRODUCT" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

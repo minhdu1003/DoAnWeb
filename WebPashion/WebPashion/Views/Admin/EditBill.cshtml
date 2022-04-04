@@ -1,0 +1,54 @@
+﻿@model WebPashion.Models.BILL
+
+@{
+    ViewBag.Title = "EditBill";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title ">Quản lý loại đơn hàng</h4>
+
+                    </div>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 style="display:inline-flex;" class="modal-title" id="exampleModalLongTitle">Sửa thông tin trạng thái đơn hàng&#160;<p style="font-weight:bold">@Model.ID</p>&#160;!</h5>
+                        </div>
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div style="margin-top:20px;" class="form-horizontal">
+                                <div style="display: inline-flex;" class="form-group">
+                                    <div class="input-group-prepend">
+                                        <span style="margin-left:50px" class="input-group-text">Trạng thái:</span>
+                                    </div>
+                                    <div style="margin-left:10px;" class="col-md-10">
+                                        <input class="form-control text-box single-line" type="number" max="1" min="0" name="Status" value="@Model.Status"/>
+                                    </div>
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input  type="submit" value="Lưu" class="btn btn-primary" />
+                                    </div>
+                                    <div style="margin-left:-110px">
+                                        <a href="@Url.Action("GetBill","Admin")">
+
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Trở về</button>
+
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        }
+                        <div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

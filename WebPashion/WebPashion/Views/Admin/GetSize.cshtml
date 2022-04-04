@@ -1,0 +1,69 @@
+﻿@using WebPashion.Models
+@model List<WebPashion.Models.PRODUCT_SIZE>
+@{
+    ViewBag.Title = "GetSize";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title ">Quản lý Size</h4>
+
+                    </div>
+                    
+                    <div class="card-body">
+                        <a href="@Url.Action("AddSize","Admin")">
+                           
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">+ Thêm mới</button>
+                          
+                        </a>                    
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead style="text-align:center" class=" text-primary">
+                                <th>
+                                    Mã Size
+                                </th>
+                                <th>
+                                    Size
+                                </th>
+                                <th>
+                                </th>
+                                <th>
+                                </th>
+                                </thead>
+                                <tbody>
+                                    @for (int i = 0; i < Model.Count(); i++)
+                                    {
+                                        <tr style="text-align:center;">
+
+                                            <td>
+                                                @Model[i].Size
+
+                                            </td>
+                                            <td>
+                                                @Model[i].SizeName
+                                            </td>
+                                            <td>
+                                                <a href="@Url.Action("EditSize","Admin", new { id = Model[i].Size})"> <img style="width:20px" src="~/Content/images/IMG/pencil.png" /></a>
+                                            </td>
+                                            <td>
+                                                <a href="@Url.Action("DeleteSize","Admin", new { id = Model[i].Size})" ><img style="width:20px" src="~/Content/images/IMG/cancel.png" /></a>
+                                            </td>
+                                        </tr>
+
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

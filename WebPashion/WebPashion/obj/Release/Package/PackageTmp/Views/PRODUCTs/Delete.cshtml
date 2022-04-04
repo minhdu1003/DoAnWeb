@@ -1,0 +1,103 @@
+﻿@model WebPashion.Models.PRODUCT
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title ">Quản lý Kích Cỡ</h4>
+
+                    </div>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 style="display:inline-flex;margin-left:450px;margin-top:50px" class="modal-title" id="exampleModalLongTitle">Bạn có chắc muốn xóa sản phẩm&#160;<p style="font-weight:bold">@Model.ProductName</p>&#160;không !</h5>
+                        </div>
+                        <div style="display:inline-flex">
+                            <div>
+                                <dl style="margin-left:350px;margin-top:25px" class="dl-horizontal">
+                                    <dt style="display:inline-flex">
+                                        <p>Tên sản phẩm:&#160;</p>
+                                        <div> @Html.DisplayFor(model => model.ProductName)</div>
+                                    </dt>
+                                    <br />
+                                    <dt style="display:inline-flex">
+                                        <p>Giá:&#160;</p>
+                                        <div>@Html.DisplayFor(model => model.ProductPrice)</div>
+                                    </dt>                              
+                                    <br />
+                                    <dt style="display:inline-flex">
+                                        <p> Số lượng:&#160;</p>
+                                        <div> @Html.DisplayFor(model => model.ProductCount)</div>
+                                    </dt>
+                                    <br />
+                                    <dt style="display:inline-flex">
+                                        <p>Ghi chú:&#160;</p>
+                                        <div>@Html.DisplayFor(model => model.Note)</div>
+                                    </dt>
+                                    <br />
+                                    <dt style="display:inline-flex">
+                                        <p>Ngày tạo:&#160;</p>
+                                        <div>@Html.DisplayFor(model => model.ProductCreatedDate)</div>
+                                    </dt>
+                                    <br />
+                                    <dt style="display:inline-flex">
+                                        <p>Thương hiệu:&#160;</p>
+                                        <div>@Html.DisplayFor(model => model.PRODUCT_BRAND.BrandName)</div>
+                                    </dt>
+                                    <br />
+                                    <dt style="display:inline-flex">
+                                        <p>Khuyến mãi:&#160;</p>
+                                        <div> @Html.DisplayFor(model => model.PRODUCT_SALE.Sale)</div>
+                                    </dt>
+                                    <br />
+                                    <dt style="display:inline-flex">
+                                        <p>Kích thước:&#160;</p>
+                                        <div> @Html.DisplayFor(model => model.PRODUCT_SIZE.SizeName)</div>
+                                    </dt>
+                                    <br />
+                                    <dt style="display:inline-flex">
+                                        <p>Loại sản phẩm:&#160;</p>
+                                        <div>@Html.DisplayFor(model => model.PRODUCT_TYPE.TypeName)</div>
+                                    </dt>
+                                </dl>
+                            </div>
+                            <div>
+                                <br />
+                                <dt style="display:inline-flex">
+                                  
+                                    <div><img width="200px" style="margin-left:100px" src="~/Content/images/IMG/@Model.ProductImage" /></div>
+                                </dt>
+                            </div>
+                        </div>
+                        <div>
+
+
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div style="margin:20px 0px 20px 500px" class="form-actions no-color">
+                                    <input type="submit" value="Xóa" class="btn btn-primary" />
+                                    <a style="margin-left:50px;" href="@Url.Action("GetProduct","Admin")">
+
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Trở về</button>
+
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                        @*  *@
+                        <div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

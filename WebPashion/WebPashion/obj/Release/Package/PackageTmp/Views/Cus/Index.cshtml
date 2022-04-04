@@ -1,0 +1,166 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title ">Quản lý khách hàng</h4>
+                    </div>
+                    <div class="card-body">
+                        <div style="display:inline-flex">
+                            <div></div>
+                            <form style="margin-left:900px" class="navbar-form">
+                                <div class="input-group no-border">
+                                    <input id="txtSearch" type="text" value="" class="form-control" placeholder="Search">
+                                    <button type="submit" class="btn btn-white btn-round btn-just-icon">
+                                        <i class="material-icons">search</i>
+                                        <div class="ripple-container"></div>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead style="text-align:center" class=" text-primary">
+                                    <tr style="text-align:center">
+                                        <th>
+                                            STT
+                                        </th>
+                                        <th>
+                                            Tên
+                                        </th>
+                                        <th >
+                                            Giới tính
+                                        </th>
+                                        <th>
+                                            Địa chỉ
+                                        </th>
+                                        <th>
+                                            Email
+                                        </th>
+                                        <th>
+                                            Số điện thoại
+                                        </th>
+                                        <th>
+                                            Tên đăng nhập
+                                        </th>
+                                        <th>
+
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="grUsers">
+                                </tbody>
+                            </table>
+                            <div style="float:right;margin-right:20px;">
+                                <div class=" pull-center">
+                                    
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination" id="pageNumber">
+                                          
+                                        </ul>
+                                    </nav>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+    </div>
+
+<script src="~/Content/js/jquery-2.1.4.min.js"></script>
+<script>
+    var tukhoa = '';
+    var trang = 1;
+    $(document).ready(function () {
+        LoadDsKhachhang(tukhoa, trang);
+    });
+    $('#txtSearch').on('keyup', () => {
+        tukhoa = $('#txtSearch').val();
+        LoadDsKhachhang(tukhoa, trang);
+    });
+    $('#pageNumber').on("click", "li", function (e) {
+
+        e.preventDefault();
+        trang = $(this).text().substr(6, 10);
+        LoadDsKhachhang(tukhoa, trang);
+    });
+    // Sự kiện xóa
+    $(document).on('click', "button[name='delete']", function () {
+        let idCus = $(this).closest('tr').attr('id');
+        if (confirm("Bạn có chắc chắn muốn xóa?")) {
+            $.ajax({
+                url: '/Cus/Delete',
+                type: 'post',
+                data: {
+                    id: idCus
+                },
+                success: function (data) {
+                    if (data.code == 200) {
+
+                        LoadDsKhachhang(tukhoa, trang);
+                        alert(data.msg);
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+            });
+        }
+    });
+    //
+    function LoadDsKhachhang(search,trang) {
+        $.ajax({
+            url: '/Cus/DsKhachhang',
+            type: 'get',
+            data: {
+                tukhoa: search,
+                trang: trang
+            },
+            success: function (data) {
+                console.log(data)
+                if (data.code == 200) {
+                    $('.grUsers').empty();
+                    var x = 1;
+                    $.each(data.dskhachhang, function (k, v) {
+                        let tr = '<tr id="' + v.CustomerID + '">'
+                        tr += '<td style="text-align:center">' + x + '</td>';
+                        tr += '<td style="text-align:center">' + v.CustomerName + '</td>';
+                        tr += '<td style="text-align:center">' + v.CustomerSex + '</td>';
+                        tr += '<td style="text-align:center">' + v.CustomerAddress + '</td>';
+                        tr += '<td style="text-align:center">' + v.CustomerEmail + '</td>';
+                        tr += '<td style="text-align:center">' + v.CustomerPhone + '</td>';
+                        tr += '<td style="text-align:center">' + v.Username + '</td>';
+                        tr += '<td>'
+                        tr += '<button class="btn btn-xs btn-info" name="delete"><i class="fa fa-trash" aria-hidden="true"></i></button>'
+                        tr += '</td>'
+                        tr += '</tr>';
+                        x++;
+                        $('.grUsers').append(tr);
+                    });
+                    if (data.Sotrang > 1) {
+                        $('#pageNumber').empty();
+                        
+                        for (i = 1; i <= data.Sotrang; i++) {
+                            let li = '';
+                            li = '<li style="margin-right:5px;" class="page-item "><a class="page-link" href="#">Trang ' + i + '</a></li>';
+                            $('#pageNumber').append(li);
+                        }
+                    }
+                    else {
+                        $('#pageNumber').empty();
+                    }
+                }
+            }
+        });
+    }
+</script>

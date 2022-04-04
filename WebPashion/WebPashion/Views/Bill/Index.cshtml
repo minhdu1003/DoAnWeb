@@ -1,0 +1,305 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title ">Quản lý đơn hàng</h4>
+                    </div>
+                    <div class="card-body">
+                        <div style="display:inline-flex">
+                            <div></div>
+                            <form style="margin-left:900px" class="navbar-form">
+                                <div class="input-group no-border">
+                                    <input id="txtSearch" type="text" value="" class="form-control" placeholder="Search">
+                                    <button type="submit" class="btn btn-white btn-round btn-just-icon">
+                                        <i class="material-icons">search</i>
+                                        <div class="ripple-container"></div>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead style="text-align:center" class=" text-primary">
+                                    <tr>
+                                        <th>
+                                            Mã đơn hàng
+                                        </th>
+                                        <th>
+                                            Ngày lập
+                                        </th>
+                                        <th>
+                                            Mã khách hàng
+                                        </th>
+                                        <th>
+                                            SĐT
+                                        </th>
+                                        <th>
+                                            Tên người nhận
+                                        </th>
+                                        <th>
+                                            Địa chỉ nhận
+                                        </th>
+                                        <th>
+                                            Tổng tiền
+                                        </th>
+                                        <th>
+                                            Trạng thái
+                                        </th>
+                                        <th>
+
+                                        </th>
+                                        <th>
+
+                                        </th>
+                                        <th>
+
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="grUsers">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@* modal *@
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalToggleLabel">Chi tiết đơn hàng</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="clearfix"></div>
+                <table class="table ">
+                    <thead>
+                        <tr>                        
+                            <th style="text-align:center;font-weight:bold" scope="col">  </th>
+                            <th style="text-align: center; font-weight: bold" scope="col">Mã chi tiết</th>
+                            <th style="text-align: center; font-weight: bold" scope="col">Tên sản phẩm</th>
+                            <th style="text-align: center; font-weight: bold" scope="col">Ảnh</th>
+                            <th style="text-align: center; font-weight: bold" scope="col">Size sản phẩm</th>
+                            <th style="text-align: center; font-weight: bold" scope="col">Số lượng</th>
+                        </tr>
+                    </thead>
+                    <tbody id="grBill">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@* edit *@
+<div class="modal fade" id="modes" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog  modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalToggleLabel">Chi tiết đơn hàng</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input id="satus" type="text" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button id="btnSave" type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* end *@
+<script src="~/Content/js/jquery-2.1.4.min.js"></script>
+<script>
+    var tukhoa = '';
+    var trang = 1;
+    $(document).ready(function () {
+        LoadDsBill(tukhoa, trang);
+    });
+    $('#txtSearch').on('keypress', () => {
+        tukhoa = $('#txtSearch').val();
+        LoadDsBill(tukhoa, trang);
+    });
+    $('#pageNumber').on("click", "li", function (e) {
+
+        e.preventDefault();
+        trang = $(this).text().substr(6, 10);
+        LoadDsBill(tukhoa, trang);
+    });
+    // Sự kiện xóa
+    $(document).on('click', "button[name='delete']", function () {
+        let idCus = $(this).closest('tr').attr('id');
+        if (confirm("Bạn có chắc chắn muốn xóa?")) {
+            $.ajax({
+                url: '/Bill/Delete',
+                type: 'post',
+                data: {
+                    id: idCus
+                },
+                success: function (data) {
+                    if (data.code == 200) {
+
+                        LoadDsBill(tukhoa, trang);
+                        alert(data.msg);
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+            });
+        }
+    });
+    //Chi tiết
+    $(document).on('click', "button[name='details']", function () {
+        let idCus = $(this).closest('tr').attr('id');
+
+        $.ajax({
+            url: '/Bill/Details',
+            type: 'get',
+            data: {
+                id: idCus
+            },
+            success: function (data) {
+                console.log(data)
+                if (data.code == 200) {
+                    $('#grBill').empty();
+                    $('#addressa').val(data.product.receiverAddress);
+                    var x = 1;
+                    $.each(data.product, function (k, v) {
+                        let tr = '<tr>'
+                        tr += '<td style="text-align:center">' + x + '</td>';
+                        tr += '<td style="text-align:center">' + v.DetailID + '</td>';
+                        tr += '<td style="text-align:center">' + v.ProductName + '</td>';
+                        tr += '<td style="text-align:center"><img src="../Content/images/IMG/' + v.ProductImage + '" style="border: 1px solid #ddd; border-radius: 4px; padding: 5px; width: 50px;" /></td>';
+                        tr += '<td style="text-align:center">' + v.Note + '</td>';
+                        tr += '<td style="text-align:center">' + v.ProductCount + '</td>';
+                        tr += '</tr>';
+                        x++;
+                        $('#grBill').append(tr);
+                    });
+                    $('#exampleModalToggle').modal();
+
+                } else {
+                    alert(data.msg);
+                }
+            }
+        });
+
+    });
+    //
+    $(document).on('click', "button[name='edit']", function () {
+        let idCus = $(this).closest('tr').attr('id');
+
+        $.ajax({
+            url: '/Bill/Bill',
+            type: 'get',
+            data: {
+                id: idCus
+            },
+            success: function (data) {
+                console.log(data.product);
+                alert(data.product.ReceiverName);
+                console.log(data.bill.ProductName);
+
+                /* $('#satus').val(data.product.BillID);*/
+
+            }
+        });
+        $('#modes').modal();
+    });
+    //
+    // Sự kiện change status
+    $(document).on('click', "a[name='status']", function () {
+        var idBill = $(this).closest('tr').attr('id');
+        $.ajax({
+            url: '/Bill/ChangStatus',
+            type: 'post',
+            data: {
+                id: idBill
+            },
+            success: function (data) {
+                if (data.code == 200) {
+                    LoadDsBill(tukhoa, trang);
+
+                } else {
+                    alert(data.msg);
+                }
+            }
+        });
+    });
+    //
+    function LoadDsBill(search, trang) {
+        $.ajax({
+            url: '/Bill/DsDonhang',
+            type: 'get',
+            data: {
+                tukhoa: search,
+                trang: trang
+            },
+            success: function (data) {
+                if (data.code == 200) {
+                    $('.grUsers').empty();
+                    var x = 1;
+                    $.each(data.dsbill, function (k, v) {
+                        var dt = new Date(parseInt(v.DateCreated.replace('/Date(', '')));
+                        var dtFinal = AddLeadingZeros(dt.getDate(), 2) + '/' +
+                            AddLeadingZeros(dt.getMonth() + 1, 2) + '/' +
+                            AddLeadingZeros(dt.getFullYear(), 4)
+                        let tr = '<tr id="' + v.ID + '">'
+                        tr += '<td style="text-align:center">' + v.ID + '</td>';
+                        tr += '<td style="text-align:center">' + dtFinal + '</td>';
+                        tr += '<td style="text-align:center">' + v.CustomerID + '</td>';
+                        tr += '<td style="text-align:center">' + v.ReceiverPhone + '</td>';
+                        tr += '<td style="text-align:center">' + v.ReceiverName + '</td>';
+                        tr += '<td style="text-align:center">' + v.receiverAddress + '</td>';
+                        tr += '<td style="text-align:center">' + v.TotalMoney.toLocaleString('it-IT', { style: 'currency', currency: 'VND' }) + '</td>';
+                        if (v.Status == 1) {
+                            tr += '<td style="color:black;text-align:center;padding-bottom: 10px;padding-top: 12px;">  <a name = "status"  style="cursor:pointer"><img style="width:30px" src="../Content/images/IMG/checked.png" /></a></td>';
+                        }
+                        else {
+                            tr += '<td style="color:black;text-align:center;padding-bottom: 10px;padding-top: 12px;">  <a name = "status"  style="cursor:pointer"><img style="width:30px" src = "../Content/images/IMG/forbidden.png" /></a></td>';
+                        }
+                        tr += '<td>'
+                        tr += '<button class="btn btn-d btn-info" name="details"><i class="fa fa-info-circle" aria-hidden="true"></i></button>'
+                        tr += '</td>'
+                        tr += '<td>'
+                        tr += '<button class="btn btn-xs btn-info" name="delete"><i class="fa fa-trash" aria-hidden="true"></i></button>'
+                        tr += '</td>'
+                        tr += '</tr>';
+
+                        $('.grUsers').append(tr);
+                    });
+                    if (data.Sotrang > 1) {
+                        $('#pageNumber').empty();
+
+                        for (i = 1; i <= data.Sotrang; i++) {
+                            let li = '';
+                            li = '<li style="margin-right:5px;" class="page-item "><a class="page-link" href="#">Trang ' + i + '</a></li>';
+                            $('#pageNumber').append(li);
+                        }
+                    }
+                    else {
+                        $('#pageNumber').empty();
+                    }
+                }
+            }
+        });
+    }
+    //Hàm xử lý thời gian
+    function AddLeadingZeros(number, size) {
+        var s = "0000" + number;
+        return s.substr(s.length - size);
+    }
+</script>

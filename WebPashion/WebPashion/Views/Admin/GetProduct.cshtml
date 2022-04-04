@@ -1,0 +1,125 @@
+﻿@using WebPashion.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<PRODUCT>
+
+@{
+    ViewBag.Title = "GetProduct";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header card-header-primary">
+                    <h4 class="card-title ">Quản lý sản phẩm</h4>
+                    <p class="card-category"></p>
+                </div>
+                <div class="card-body">
+                    <div style="display:inline-flex">
+                        <a href="@Url.Action("Create","PRODUCTs")">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">+ Thêm mới</button>
+                        </a>
+                        <form style="margin-left:900px" class="navbar-form">
+                            <div class="input-group no-border">
+                                <input type="text" value="" class="form-control" placeholder="Search">
+                                <button type="submit" class="btn btn-white btn-round btn-just-icon">
+                                    <i class="material-icons">search</i>
+                                    <div class="ripple-container"></div>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead style="text-align:center" class=" text-primary">
+                            <th>
+                                Tên sản phẩm
+                            </th>
+                            <th>
+                                Giá
+                            </th>
+                            <th>
+                                Ảnh
+                            </th>
+                            <th>
+                                Số lượng
+                            </th>
+                            <th>
+                                Size
+                            </th>
+                            <th>
+                                Loại
+                            </th>
+                            <th>
+                                Thương hiệu
+                            </th>
+                            <th>
+                                Khuyến mãi
+                            </th>
+                            <th>
+                                Ngày nhập
+                            </th>
+                            <th>
+                                Ghi chú
+                            </th>
+                            <th>
+                            </th>
+                            <th>
+                            </th>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < Model.Count(); i++)
+                                {
+                                    <tr style="text-align:center;">
+                                        <td>
+                                            @Model[i].ProductName
+                                        </td>
+                                        <td>
+                                            @Model[i].ProductPrice
+                                        </td>
+                                        <td>
+                                            <img src="@Url.Content("~/Content/images/IMG/" + Model[i].ProductImage)" style="border: 1px solid #ddd; border-radius: 4px; padding: 5px; width: 50px;" />
+                                        </td>
+                                        <td>
+                                            @Model[i].ProductCount
+                                        </td>
+                                        <td>
+                                            @Model[i].PRODUCT_SIZE.SizeName
+                                        </td>
+                                        <td>
+                                            @Model[i].PRODUCT_TYPE.TypeName
+                                        </td>
+                                        <td>
+                                            @Model[i].PRODUCT_BRAND.BrandName
+                                        </td>
+                                        <td>
+                                            @Model[i].PRODUCT_SALE.SaleName
+                                        </td>
+                                        <td>
+                                            @String.Format("{0:d/M/yyyy}", @Model[i].ProductCreatedDate)
+                                        </td>
+                                        <td>
+                                            @Model[i].Note
+                                        </td>
+                                        <td>
+                                            <a  href="@Url.Action("Edit","PRODUCTs", new { id = Model[i].ID })"> <img style="width:20px" src="~/Content/images/IMG/pencil.png" /></a>
+                                        </td>
+                                        <td>
+                                            <a  href="@Url.Action("Delete","PRODUCTs", new { id = Model[i].ID })"><img style="width:20px" src="~/Content/images/IMG/cancel.png" /></a>
+                                        </td>
+
+                                    </tr>
+                                }
+                            </tbody>
+                            <tr>
+                            </tr>
+                        </table>
+                    </div>
+                    <div style="text-align:center;margin-left:600px">@Html.PagedListPager(Model, page => Url.Action("GetProduct", new { page = page }))</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

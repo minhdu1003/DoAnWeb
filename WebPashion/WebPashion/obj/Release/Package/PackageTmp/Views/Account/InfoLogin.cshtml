@@ -1,0 +1,18 @@
+﻿@using WebPashion.Models
+@{
+        CUSTOMER cus = (CUSTOMER)Session["account"];
+    
+
+    if (cus == null)
+    {
+        <li> <a href="~/Account/Login" data-toggle="modal"><i class="fa fa-unlock-alt"></i>Đăng nhập </a></li>
+        <li> <a href="~/Account/Registor" data-toggle="modal"><i class="fa fa-pencil-square-o"></i> Đăng ký </a> </li>
+    }
+    else
+    {
+<li> <a href="~/Account/Login" data-toggle="modal"></a><img style="width:20px" src="~/Content/images/IMG/user12.png" />&ensp;@Html.Action("NameLogin", "Account")</li>       
+        <li> <a href="@Url.Action("LogOut","Account")" data-toggle="modal"><i class="fa fa-pencil-square-o"></i> Đăng Xuất </a> </li>
+
+    }
+}
+

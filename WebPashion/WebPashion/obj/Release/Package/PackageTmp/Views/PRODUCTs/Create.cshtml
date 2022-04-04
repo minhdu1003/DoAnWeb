@@ -1,0 +1,121 @@
+﻿@model WebPashion.Models.PRODUCT
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title ">Quản lý sản phẩm</h4>
+                    </div>
+                    <div class="modal-content">
+                        <div style="margin-bottom:30px;" class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Thêm sản phẩm mới</h5>
+                        </div>
+                        @using (Html.BeginForm("Create", "PRODUCTs", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal">
+
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div style="display:inline-flex">
+                                    <div style="width:50%">
+                                        <div style="display:inline-flex" class="form-group">
+                                            <span style="margin-left:100px" class="input-group-text">Tên sản phẩm:</span>
+                                            <div class="col-md-10">
+                                                <input type="text" name="textname" class="form-control text-info" required/>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div style="display:inline-flex" class="form-group">
+                                            <span style="margin-left:178px" class="input-group-text">Giá:</span>
+                                            <div class="col-md-10">
+                                                <input type="number" name="money" class="form-control text-info" required />
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div style="display:inline-flex" class="form-group">
+                                            <span style="margin-left:140px" class="input-group-text">Số lượng:</span>
+                                            <div class="col-md-10">
+                                                <input type="number" min="1" name="count" class="form-control text-info" required />
+                                                </div>
+                                        </div>
+                                        <br />
+                                        <div style="display:inline-flex" class="form-group">
+                                            <span style="margin-left:126px" class="input-group-text">Kích thước:</span>
+                                            <div class="col-md-10">
+                                                @Html.DropDownList("Size", null, htmlAttributes: new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.Size, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div style="display:inline-flex" class="form-group">
+                                            <span style="margin-left:100px" class="input-group-text">Loại sản phẩm:</span>
+
+                                            <div class="col-md-10">
+                                                @Html.DropDownList("Type", null, htmlAttributes: new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+                                            </div>
+                                          
+                                        </div>
+                                        <br />
+                                        <div style="display:inline-flex" class="form-group">
+                                            <span style="margin-left:117px" class="input-group-text">Thương hiệu:</span>
+                                            <div class="col-md-10">
+                                                @Html.DropDownList("Brand", null, htmlAttributes: new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.Brand, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div style="display:inline-flex" class="form-group">
+                                            <span style="margin-left:121px" class="input-group-text">Khuyến mãi:</span>
+                                            <div class="col-md-10">
+                                                @Html.DropDownList("Sale", null, htmlAttributes: new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.Sale, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div style="display:inline-flex" class="form-group">
+                                            <span style="margin-left:150px" class="input-group-text">Ghi chú:</span>
+                                            <div class="col-md-10">
+                                                @Html.EditorFor(model => model.Note, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Note, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>                                      
+                                        <br />
+                                        <div style="display:inline-flex" class="form-group">
+                                            <span style="margin-left:190px" class="input-group-text">Chọn ảnh:</span>
+                                        </div>
+                                        <div style="margin-left:20px; display:inline-flex;">                                          
+                                            <input type="file" name="ImageUpload" onchange="ShowImagePreview(this, document.getElementById('previewImage'))" />
+                                        </div>
+                                        <div style="margin-left:250px;">
+                                            <img  src="~/Content/images/IMG/khung.png" style="width:300px;margin:10px;" id="previewImage" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div style="margin:20px 0px 20px 500px" class="form-actions no-color">
+                                    <input type="submit" value="Thêm" class="btn btn-primary" />
+                                    <a style="margin-left:50px;" href="@Url.Action("GetProduct","Admin")">
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Trở về</button>
+                                    </a>
+                                </div>
+                            </div>
+                        }
+                        <div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

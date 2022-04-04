@@ -1,0 +1,57 @@
+﻿@model WebPashion.Models.PRODUCT_BRAND
+
+@{
+    ViewBag.Title = "AddSize";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title ">Quản lý Size</h4>
+
+                    </div>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Thêm thương hiệu mới</h5>
+                        </div>
+                        @using (Html.BeginForm())
+                        {
+                            <div class="modal-body">
+                                <div style="padding-right:300px" class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span style="margin-left:50px" class="input-group-text">Tên thương hiệu:</span>
+                                    </div>
+                                    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" name="brandname">
+                                    <input style="margin-left:100px" type="submit" value="Thêm mới" class="btn btn-primary" />
+
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"></span>
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+
+                                </div>
+                                <a style="display:inline-flex" href="@Url.Action("GetBrand","Admin")">
+                                    <i class="material-icons">home</i><p style="font-size:16px"> Trở về</p>
+                                </a>
+                            </div>
+
+                        }
+                        <div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

@@ -1,0 +1,62 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tag Keywords -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Modern Login Form Responsive Widget,Login form widgets, Sign up Web forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements" />
+    <script type="application/x-javascript">
+         addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+        // function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link rel="stylesheet" href="~/Content/css/style-login1.css" type="text/css" media="all" /> <!-- Style-CSS -->
+    <link rel="stylesheet" href="~/Content/css/font-awesome-login.css"> <!-- Font-Awesome-Icons-CSS -->
+    <link href="//fonts.googleapis.com/css?family=Snippet" rel="stylesheet"><!--online fonts-->
+    <!-- //web-fonts -->
+</head>
+<body>
+
+    <div class="main-container">
+        <div class="main-content-agile">
+            <div class="w3ls-pro">
+                <a href="@Url.Action("Index","Home")"><img style="width:30px;float:left;margin:20px 0px 0px 30px;" src="~/Content/images/come-back.png" /></a>
+                <h2>Login Now</h2>
+
+            </div>   
+            
+            <h4 style="color:red;text-align:center">@ViewBag.Notification</h4>
+            @Html.ValidationSummary(true)
+            <div class="sub-main-w3ls">
+                <form action="#" method="post">        
+                    <input placeholder="Enter your E-mail" name="username" type="text" required="">
+                    <span class="icon1"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                    @ViewData["Enron1"]
+                    <input placeholder="Enter Password" name="password" type="password" required="">
+                    <span class="icon2"><i class="fa fa-unlock-alt" aria-hidden="true"></i></span>
+                    @ViewData["Enron1"]
+                    <div class="checkbox-w3">
+                        <span class="check-w3"><input type="checkbox" />Remember Me</span>
+                        <a href="#">Forgot Password?</a>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="social-icons">
+                        <ul>
+                            <li><a href="#"><i class="fa fa-facebook" sia-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                        </ul>
+                    </div>
+                    <input type="submit" value="">
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="~/Content/js/jquery.vide.min.js"></script><!--common-js-->
+    <script src="~/Content/js/jquery-2.1.4.min1.js"></script><!--video-js-->
+
+</body>
+</html>

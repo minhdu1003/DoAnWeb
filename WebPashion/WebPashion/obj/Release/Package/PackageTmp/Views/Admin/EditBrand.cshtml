@@ -1,0 +1,55 @@
+﻿@model WebPashion.Models.PRODUCT_BRAND
+
+@{
+    ViewBag.Title = "EditBrand";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title ">Quản lý thương hiệu</h4>
+
+                    </div>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 style="display:inline-flex;" class="modal-title" id="exampleModalLongTitle">Sửa thương hiệu&#160;<p style="font-weight:bold">@Model.BrandName</p></h5>
+                        </div>
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+
+                    <div style="margin-top:20px;" class="form-horizontal">
+                        <div style="display: inline-flex;" class="form-group">
+                            <div class="input-group-prepend">
+                                <span style="margin-left:50px" class="input-group-text">Tên thương hiệu:</span>
+                            </div>
+                            <div style="margin-left:10px;" class="col-md-10">
+                                @Html.EditorFor(model => model.BrandName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.BrandName, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Lưu" class="btn btn-primary" />
+                            </div>
+                            <div style="margin-left:-200px">
+                                <a href="@Url.Action("GetBrand","Admin")">
+
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Trở về</button>
+
+                                </a>
+                            </div>
+                        </div>
+                        
+                    </div>
+                        }
+                        <div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

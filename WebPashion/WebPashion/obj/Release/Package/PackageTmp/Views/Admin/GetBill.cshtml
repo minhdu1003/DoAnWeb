@@ -1,0 +1,104 @@
+﻿@using WebPashion.Models
+@model List < WebPashion.Models.BILL >
+ @{
+    ViewBag.Title = "GetBill";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title ">Quản lý đơn hàng</h4>
+
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead style="text-align:center" class=" text-primary">
+                                <th>
+                                    Mã đơn hàng
+                                </th>
+                                <th>
+                                    Ngày lập
+                                </th>
+                                <th>
+                                    Mã khách hàng
+                                </th>
+                                <th>
+                                    Trạng thái
+                                </th>
+                                <th>
+                                    Tên người nhận
+                                </th>
+                                <th>
+                                    Địa chỉ nhận
+                                </th>
+                                <th>
+                                    Số điện thoại
+                                </th>
+                                <th>
+                                    Tông tiền
+                                </th>
+                                <th>
+                                </th>
+                                <th>
+
+                                    </thead>
+                                <tbody>
+                                    @for (int i = 0; i < Model.Count(); i++)
+                                    {
+                                        <tr style="text-align:center;">
+
+                                            <td>
+                                                @Model[i].ID
+
+                                            </td>
+                                            <td>
+                                                @String.Format("{0:d/M/yyyy}", @Model[i].DateCreated)
+                                            </td>
+                                            <td>
+                                                @Model[i].CUSTOMER.CustomerID
+                                            </td>
+                                            <td>
+                                                @Model[i].Status
+                                            </td>
+                                            <td>
+                                                @Model[i].ReceiverName
+                                            </td>
+                                            <td>
+                                                @Model[i].receiverAddress
+                                            </td>
+                                            <td>
+                                                @Model[i].ReceiverPhone
+                                            </td>
+                                            <td>
+                                                @Model[i].TotalMoney
+                                            </td>
+                                            <td>
+                                                <a href="@Url.Action("EditBill","Admin", new {id = Model[i].ID })"><img style="width:20px" src="~/Content/images/IMG/pencil.png" /></a>
+                                            </td>
+                                            <td>
+                                                <a href="@Url.Action("DeleteBill","Admin", new {id = Model[i].ID })"><img style="width:20px" src="~/Content/images/IMG/cancel.png" /></a>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                                <tr>
+                                    @*<input type="button" value="Create User" onclick="" class="btn btn-primary pull-left" />*@
+
+                                    @*<input class="btn btn--blue" type="submit" value="SUBMIT" name="SUBMIT">
+            <button type="submit" class="btn btn-primary pull-right">Create</button>*@
+
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

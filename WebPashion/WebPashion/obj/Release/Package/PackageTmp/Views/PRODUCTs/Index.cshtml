@@ -1,0 +1,88 @@
+﻿@model IEnumerable<WebPashion.Models.PRODUCT>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductImage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductCount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Note)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductCreatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PRODUCT_BRAND.BrandName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PRODUCT_SALE.Sale)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PRODUCT_SIZE.SizeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PRODUCT_TYPE.TypeName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductImage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductCount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Note)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductCreatedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRODUCT_BRAND.BrandName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRODUCT_SALE.Sale)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRODUCT_SIZE.SizeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRODUCT_TYPE.TypeName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
